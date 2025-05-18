@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container-fluid px-0 overflow-hidden">
+
+        <!-- Hero Section -->
+        <section class="hero-section text-center text-white d-flex align-items-center justify-content-center">
+          <div class="container">
+            <h1 class="display-3 fw-bold mb-3 wow animate__animated animate__fadeInDown" data-wow-duration="1s">
+              Manage Your Contacts Seamlessly
+            </h1>
+            <p class="lead mb-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.5s" data-wow-duration="1s">
+              The modern solution for organizing and accessing your contact information, anytime, anywhere.
+            </p>
+            <div class="wow animate__animated animate__fadeInUp" data-wow-delay="1s" data-wow-duration="1s">
+              <a routerLink="/add-contact" class="btn btn-light btn-lg me-3 shadow-sm hero-button">
+                <i class="bi bi-plus-circle-fill me-2"></i>Add New Contact
+              </a>
+              <a routerLink="/get-contact" class="btn btn-outline-light btn-lg shadow-sm hero-button">
+                 <i class="bi bi-list-ul me-2"></i>View All Contacts
+              </a>
+            </div>
+          </div>
+        </section>
+      
+        <!-- Features Section -->
+        <section class="features-section py-5 bg-light">
+          <div class="container">
+            <h2 class="text-center mb-5 fw-bold wow animate__animated animate__fadeInUp" data-wow-delay="0.2s">Why Choose Us?</h2>
+            <div class="row text-center">
+              <!-- Feature 1 -->
+              <div class="col-md-4 mb-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.4s">
+                <div class="card h-100 border-0 shadow-sm feature-card">
+                  <div class="card-body">
+                    <div class="feature-icon bg-primary text-white mb-3">
+                      <i class="bi bi-cloud-arrow-up-fill"></i>
+                    </div>
+                    <h5 class="card-title fw-bold">Always Accessible</h5>
+                    <p class="card-text">Your contacts are stored securely and available from any device with internet access.</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Feature 2 -->
+              <div class="col-md-4 mb-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.6s">
+                <div class="card h-100 border-0 shadow-sm feature-card">
+                  <div class="card-body">
+                    <div class="feature-icon bg-success text-white mb-3">
+                      <i class="bi bi-search"></i>
+                    </div>
+                    <h5 class="card-title fw-bold">Quick Search</h5>
+                    <p class="card-text">Instantly find the contact you need with our powerful and fast search functionality.</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Feature 3 -->
+              <div class="col-md-4 mb-4 wow animate__animated animate__fadeInUp" data-wow-delay="0.8s">
+                <div class="card h-100 border-0 shadow-sm feature-card">
+                   <div class="card-body">
+                    <div class="feature-icon bg-warning text-white mb-3">
+                      <i class="bi bi-shield-lock-fill"></i>
+                    </div>
+                    <h5 class="card-title fw-bold">Secure & Private</h5>
+                    <p class="card-text">We prioritize your data security and privacy with robust protection measures.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      
+        <!-- Call to Action (Optional) -->
+        <section class="cta-section py-5 text-center bg-primary text-white">
+            <div class="container wow animate__animated animate__pulse" data-wow-delay="0.5s" data-wow-iteration="2">
+                <h2 class="fw-bold">Ready to Get Started?</h2>
+                <p class="lead mb-4">Organize your contacts like never before.</p>
+                <a routerLink="/add-contact" class="btn btn-light btn-lg shadow-sm hero-button">
+                    <i class="bi bi-rocket-launch-fill me-2"></i>Start Adding Contacts
+                </a>
+            </div>
+        </section>
+      
+      </div>
+</body>
+</html>

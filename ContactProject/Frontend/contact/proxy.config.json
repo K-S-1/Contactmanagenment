@@ -1,0 +1,20 @@
+{
+    "/contactManagement": {
+        "target": "http://localhost:8000",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    },
+    "/contactUser": {
+        "target": "http://localhost:8000",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    },
+    "/auth": {
+        "target": "http://localhost:8000",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    }
+}

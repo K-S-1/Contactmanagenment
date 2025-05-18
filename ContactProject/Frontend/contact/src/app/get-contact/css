@@ -1,0 +1,73 @@
+/* Add subtle hover effect */
+tbody tr:hover {
+  background-color: rgba(0, 123, 255, 0.05); /* Light blue tint */
+}
+
+/* Ensure buttons in table align well */
+td .btn {
+  margin-bottom: 2px; /* Add slight spacing if buttons wrap */
+  margin-top: 2px;
+}
+
+/* Optional: Style for the loading spinner container */
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
+
+/* Ensure alerts are easily dismissible */
+.alert .btn-close {
+  font-size: 0.75rem;
+  padding: 0.5rem;
+}
+
+/* Styling for sortable table headers */
+.sortable-header {
+  cursor: pointer;
+  position: relative;
+  user-select: none; /* Prevent text selection during clicks */
+  padding-right: 20px; /* Make room for sort icon */
+}
+
+.sortable-header:hover {
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+.sortable-header i[class*="sort"] {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8rem;
+}
+
+/* Style pagination controls */
+.pagination .page-link {
+  color: #0d6efd;
+  cursor: pointer;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  color: white;
+}
+
+.pagination .page-item.disabled .page-link {
+  color: #6c757d;
+  pointer-events: none;
+  cursor: default;
+}
+
+/* Animate row transitions for smoother UX */
+.animate__fadeIn {
+  animation-duration: 0.5s;
+}
+
+/* Make page size controls more compact on mobile */
+@media (max-width: 767.98px) {
+  .btn-group-sm .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.7rem;
+  }
+}

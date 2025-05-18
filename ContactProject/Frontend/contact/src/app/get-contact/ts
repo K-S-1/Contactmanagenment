@@ -1,0 +1,189 @@
+// get-contact.component.ts - updated with pagination and sorting
+import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Contact } from '../models/contact';
+import { ContactServiceService } from '../service/contact-service.service';
+import { UpdateContactComponent } from '../update-contact/update-contact.component';
+import { DeleteContactComponent } from '../delete-contact/delete-contact.component';
+
+@Component({
+  selector: 'app-get-contact',
+  standalone : false,
+  templateUrl: './get-contact.component.html',
+  styleUrls: ['./get-contact.component.css']
+})
+export class GetContactComponent implements OnInit {
+
+  contacts: Contact[] = [];
+  isLoading: boolean = true;
+  error: string | null = null;
+  successMessage: string | null = null;
+
+  // Pagination parameters
+  currentPage: number = 0;
+  pageSize: number = 10;
+  totalElements: number = 0;
+  totalPages: number = 0;
+  pageSizeOptions: number[] = [5, 10, 25, 50];
+  isFirstPage: boolean = true;
+  isLastPage: boolean = false;
+  isEmpty: boolean = false;
+
+  // Sorting parameters
+  sortBy: string = 'id';
+  sortDirection: string = 'ASC';
+
+  constructor(
+    private contactService: ContactServiceService,
+    private modalService: NgbModal
+  ) { }
+
+  ngOnInit(): void {
+    this.loadContacts();
+  }
+
+  loadContacts(): void {
+    this.isLoading = true;
+    this.error = null;
+    
+    this.contactService.getAllData(
+      this.currentPage,
+      this.pageSize,
+      this.sortBy,
+      this.sortDirection
+    ).subscribe({
+      next: (response: any) => {
+        console.log("Received paginated contacts:", response);
+        this.contacts = response.content;
+        this.totalElements = response.totalElements;
+        this.totalPages = response.totalPages;
+        this.currentPage = response.currentPage;
+        this.pageSize = response.size;
+        this.isFirstPage = response.first;
+        this.isLastPage = response.last;
+        this.isEmpty = response.empty;
+        
+        this.isLoading = false;
+      },
+      error: (err: Error) => {
+        console.error('Error fetching contacts:', err);
+        this.error = err.message || 'Failed to load contacts. Please try again later.';
+        this.isLoading = false;
+      }
+    });
+  }
+
+  // Page navigation methods
+  goToPage(page: number): void {
+    if (page >= 0 && page < this.totalPages) {
+      this.currentPage = page;
+      this.loadContacts();
+    }
+  }
+
+  previousPage(): void {
+    if (!this.isFirstPage) {
+      this.currentPage--;
+      this.loadContacts();
+    }
+  }
+
+  nextPage(): void {
+    if (!this.isLastPage) {
+      this.currentPage++;
+      this.loadContacts();
+    }
+  }
+
+  firstPage(): void {
+    if (!this.isFirstPage) {
+      this.currentPage = 0;
+      this.loadContacts();
+    }
+  }
+
+  lastPage(): void {
+    if (!this.isLastPage) {
+      this.currentPage = this.totalPages - 1;
+      this.loadContacts();
+    }
+  }
+
+  // Change page size
+  changePageSize(size: number): void {
+    this.pageSize = size;
+    this.currentPage = 0; // Reset to first page when changing page size
+    this.loadContacts();
+  }
+
+  // Handle sorting
+  sort(column: string): void {
+    if (this.sortBy === column) {
+      // Toggle direction if clicking the same column
+      this.sortDirection = this.sortDirection === 'ASC' ? 'DESC' : 'ASC';
+    } else {
+      // Default to ASC when changing column
+      this.sortBy = column;
+      this.sortDirection = 'ASC';
+    }
+    this.loadContacts();
+  }
+
+  // Get sort icon class
+  getSortIconClass(column: string): string {
+    if (this.sortBy !== column) {
+      return 'bi bi-arrow-down-up text-muted';
+    }
+    return this.sortDirection === 'ASC' 
+      ? 'bi bi-sort-up text-primary' 
+      : 'bi bi-sort-down text-primary';
+  }
+
+  // Existing modal methods
+  openUpdateModal(contact: Contact): void {
+    const modalRef = this.modalService.open(UpdateContactComponent, {
+      centered: true,
+      backdrop: 'static'
+    });
+    modalRef.componentInstance.contactToUpdate = { ...contact };
+    
+    modalRef.result.then(
+      (result) => {
+        if (result === 'saved') {
+          this.showSuccessMessage('Contact updated successfully!');
+          this.loadContacts();
+        }
+      },
+      (reason) => {
+        console.log(`Update modal dismissed: ${reason}`);
+      }
+    );
+  }
+
+  openDeleteModal(contact: Contact): void {
+    const modalRef = this.modalService.open(DeleteContactComponent, {
+      centered: true,
+      size: 'sm'
+    });
+    modalRef.componentInstance.contactToDelete = contact;
+
+    modalRef.result.then(
+      (result) => {
+        if (result === 'deleted') {
+          this.showSuccessMessage('Contact deleted successfully!');
+          this.loadContacts();
+        }
+      },
+      (reason) => {
+        console.log(`Delete modal dismissed: ${reason}`);
+      }
+    );
+  }
+
+  showSuccessMessage(message: string): void {
+    this.successMessage = message;
+    setTimeout(() => {
+      this.successMessage = null;
+    }, 3000);
+  }
+}

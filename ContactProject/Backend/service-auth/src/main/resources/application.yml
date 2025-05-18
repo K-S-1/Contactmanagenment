@@ -1,0 +1,25 @@
+openapi:
+  service:
+    title: service-auth
+    version: 1.0.0
+    url: http://localhost:9090
+
+springdoc:
+  api-docs:
+    path: /service-auth/v3/api-docs  # path modified where swagger-ui works
+  swagger-ui:
+    path: /service-auth/swagger-ui.html
+#http://localhost:9090/service-auth/swagger-ui/index.html --> by default url
+
+spring:
+  mail:
+    host: smtp.gmail.com
+    username: krishna@gmail.com
+    password: krishna
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true

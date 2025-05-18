@@ -1,0 +1,24 @@
+server:
+  port: 8000
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id : user-contact-service
+        uri : lb://SERVICE-CONTACT-USER 
+        predicates :
+          - Path=/contactUser/**
+        filters:
+        - AuthenticationFilter
+      - id : management-contact-service
+        uri : lb://SERVICE-CONTACT-MANAGEMENT
+        predicates :
+          - Path=/contactManagement/**
+        filters:
+        - AuthenticationFilter
+      - id: auth-service
+        uri : lb://SERVICE-AUTH
+        predicates :
+          - Path=/auth/** 
+        filters : 
+        - AuthenticationFilter    
