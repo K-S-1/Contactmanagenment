@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Modal Header -->
+<div class="modal-header bg-danger text-white">
+    <h4 class="modal-title"><i class="bi bi-exclamation-triangle-fill me-2"></i>Confirm Deletion</h4>
+    <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="dismiss()" [disabled]="isDeleting"></button>
+  </div>
+  
+  <!-- Modal Body -->
+  <div class="modal-body">
+     <!-- Error Message Alert inside modal -->
+    <div *ngIf="error" class="alert alert-warning d-flex align-items-center" role="alert">
+       <i class="bi bi-exclamation-circle-fill me-2"></i>
+      <div>{{ error }}</div>
+    </div>
+  
+    <p *ngIf="contactToDelete && !error">
+      Are you sure you want to permanently delete the contact:
+      <strong class="text-danger">{{ contactToDelete.name }}</strong>?
+    </p>
+    <p *ngIf="!contactToDelete && !error" class="text-danger">
+        Contact information is missing. Cannot proceed.
+    </p>
+    <p class="text-muted"><small>This action cannot be undone.</small></p>
+  </div>
+  
+  <!-- Modal Footer -->
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="dismiss()" [disabled]="isDeleting">
+      <i class="bi bi-x-circle me-1"></i>Cancel
+    </button>
+    <button type="button" class="btn btn-danger" (click)="confirmDelete()" [disabled]="isDeleting || !contactToDelete || error">
+      <span *ngIf="!isDeleting"><i class="bi bi-trash-fill me-1"></i>Delete</span>
+      <span *ngIf="isDeleting" class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+      <span *ngIf="isDeleting">Deleting...</span>
+    </button>
+  </div>
+</body>
+</html>

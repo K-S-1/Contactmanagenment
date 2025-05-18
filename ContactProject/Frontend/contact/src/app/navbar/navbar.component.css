@@ -1,0 +1,79 @@
+/* Styles specific to the Navbar */
+.navbar {
+  transition: background-color 0.3s ease-in-out;
+  /* Ensure z-index is high enough if other elements overlap */
+  /* z-index: 1030; */
+  /* Default Bootstrap fixed-top z-index */
+}
+
+.navbar-brand {
+  letter-spacing: 1px;
+  transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.05);
+  /* Subtle zoom effect on brand hover */
+}
+
+.nav-link {
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  border-radius: 5px;
+  /* Rounded corners for links */
+  margin: 0 5px;
+  /* Spacing between links */
+  padding: 8px 15px !important;
+  /* Ensure consistent padding, overriding Bootstrap defaults if necessary */
+  text-align: center;
+  /* Center text for better alignment on collapse */
+}
+
+/* Style for hovered or active links */
+.nav-link:hover,
+.nav-link.active {
+  /* .active class is added by routerLinkActive */
+  color: #ffffff !important;
+  /* Brighter text color */
+  background-color: rgba(255, 255, 255, 0.2);
+  /* Subtle background highlight */
+}
+
+/* Ensure icons within links align nicely */
+.nav-link i {
+  vertical-align: middle;
+  /* Align icon vertically */
+}
+
+/* Optional: Add a bit more vertical padding on mobile when collapsed */
+@media (max-width: 991.98px) {
+
+  /* Bootstrap's lg breakpoint */
+  .navbar-nav .nav-item {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .nav-link {
+    margin-left: 0;
+    margin-right: 0;
+    display: block;
+    /* Ensure links take full width when stacked */
+  }
+}
+
+
+/* --- Global Style (Ideally in styles.css/scss or index.html <style>) --- */
+
+/* Add padding to the body or main content container to prevent content
+ from being hidden behind the fixed navbar.
+ Adjust the '70px' value based on your navbar's actual height. */
+body {
+  padding-top: 70px;
+}
+
+/* Or, if you have a specific container wrapping your <router-outlet> */
+/*
+.main-content-container {
+padding-top: 70px;
+}
+*/

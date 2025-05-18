@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Modal Header -->
+<div class="modal-header bg-primary text-white">
+    <h4 class="modal-title"><i class="bi bi-pencil-square me-2"></i>Edit Contact</h4>
+    <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="dismiss()" [disabled]="isSaving"></button>
+  </div>
+  
+  <!-- Modal Body - Contains the Form -->
+  <div class="modal-body">
+    <!-- Error Message Alert inside modal -->
+    <div *ngIf="error" class="alert alert-danger d-flex align-items-center" role="alert">
+       <i class="bi bi-exclamation-circle-fill me-2"></i>
+      <div>{{ error }}</div>
+    </div>
+  
+    <!-- Use ngForm for validation -->
+    <form #updateForm="ngForm" (ngSubmit)="onSubmit(updateForm)">
+      <!-- Name Field -->
+      <div class="mb-3">
+        <label for="updateName" class="form-label">Name <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="updateName" name="name"
+               [(ngModel)]="currentContact.name"
+               required
+               minlength="3"
+               #name="ngModel"
+               [ngClass]="{'is-invalid': updateForm.submitted && name.invalid}">
+        <div *ngIf="updateForm.submitted && name.invalid" class="invalid-feedback">
+          <span *ngIf="name.errors?.['required']">Name is required.</span>
+          <span *ngIf="name.errors?.['minlength']">Name must be at least 3 characters long.</span>
+        </div>
+      </div>
+  
+      <!-- Mobile Number Field -->
+      <div class="mb-3">
+        <label for="updateMobileNo" class="form-label">Mobile Number <span class="text-danger">*</span></label>
+        <input type="tel" class="form-control" id="updateMobileNo" name="mobileNo"
+               [(ngModel)]="currentContact.mobileNo"
+               required
+               pattern="^[6-9]\d{9}$"  
+               #mobileNo="ngModel"
+               [ngClass]="{'is-invalid': updateForm.submitted && mobileNo.invalid}">
+          <div *ngIf="updateForm.submitted && mobileNo.invalid" class="invalid-feedback">
+            <span *ngIf="mobileNo.errors?.['required']">Mobile number is required.</span>
+            <span *ngIf="mobileNo.errors?.['pattern']">Please enter a valid 10-digit Indian mobile number.</span>
+         </div>
+      </div>
+  
+      <!-- Landline Number Field (Optional) -->
+      <div class="mb-3">
+        <label for="updateLandLineNo" class="form-label">Landline Number</label>
+        <input type="tel" class="form-control" id="updateLandLineNo" name="landLineNo"
+               [(ngModel)]="currentContact.landLineNo"
+               #landLineNo="ngModel">
+          <!-- Add pattern validation if needed -->
+      </div>
+  
+      <!-- Address Field -->
+      <div class="mb-3">
+        <label for="updateAddress" class="form-label">Address <span class="text-danger">*</span></label>
+        <textarea class="form-control" id="updateAddress" name="address" rows="3"
+                  [(ngModel)]="currentContact.address"
+                  required
+                  #address="ngModel"
+                  [ngClass]="{'is-invalid': updateForm.submitted && address.invalid}"></textarea>
+         <div *ngIf="updateForm.submitted && address.invalid" class="invalid-feedback">
+           <span *ngIf="address.errors?.['required']">Address is required.</span>
+         </div>
+      </div>
+  
+      <!-- Pincode Field -->
+      <div class="mb-3">
+        <label for="updatePincode" class="form-label">Pincode <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="updatePincode" name="pincode"
+               [(ngModel)]="currentContact.pincode"
+               required
+               pattern="^\d{6}$" 
+               #pincode="ngModel"
+               [ngClass]="{'is-invalid': updateForm.submitted && pincode.invalid}">
+         <div *ngIf="updateForm.submitted && pincode.invalid" class="invalid-feedback">
+           <span *ngIf="pincode.errors?.['required']">Pincode is required.</span>
+           <span *ngIf="pincode.errors?.['pattern']">Please enter a valid 6-digit Indian pincode.</span>
+         </div>
+      </div>
+  
+       <!-- Hidden submit button to allow Enter key submission -->
+       <button type="submit" style="display: none;"></button>
+    </form>
+  </div>
+  
+  <!-- Modal Footer -->
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="dismiss()" [disabled]="isSaving">
+      <i class="bi bi-x-circle me-1"></i>Cancel
+    </button>
+    <button type="submit" class="btn btn-primary" (click)="updateForm.ngSubmit.emit()" [disabled]="isSaving || updateForm.invalid">
+      <span *ngIf="!isSaving"><i class="bi bi-check-circle me-1"></i>Save Changes</span>
+      <span *ngIf="isSaving" class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+      <span *ngIf="isSaving">Saving...</span>
+    </button>
+  </div>
+</body>
+</html>

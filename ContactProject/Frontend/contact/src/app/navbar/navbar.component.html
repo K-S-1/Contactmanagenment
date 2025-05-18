@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm fixed-top"
+    >
+      <div class="container">
+        <!-- Brand Logo/Name -->
+        <a class="navbar-brand fw-bold" routerLink="/">
+          <i class="bi bi-person-lines-fill me-2"></i>
+          <!-- Optional: Bootstrap Icon -->
+          Contact Manager
+        </a>
+
+        <!-- Navbar Toggler (for responsive behavior) -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavContent"
+          aria-controls="navbarNavContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links Container -->
+        <div class="collapse navbar-collapse" id="navbarNavContent">
+          <!-- Use ms-auto to push the links to the right -->
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+            <!-- Contact Management Links -->
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                routerLink="/add-contact"
+                routerLinkActive="active"
+              >
+                <i class="bi bi-person-plus-fill me-1"></i>
+                Add Contact
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                routerLink="/get-contact"
+                routerLinkActive="active"
+              >
+                <i class="bi bi-people-fill me-1"></i>
+                All Contacts
+              </a>
+            </li>
+
+            <!-- Authentication Links -->
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                routerLink="/login-user"
+                routerLinkActive="active"
+              >
+                <i class="bi bi-box-arrow-in-right me-1"></i>
+                <!-- Login Icon -->
+                Login
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                routerLink="/registration-user"
+                routerLinkActive="active"
+              >
+                <i class="bi bi-person-plus me-1"></i>
+                <!-- Sign Up Icon -->
+                Sign Up
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                (click)="logout()"
+              >
+                <i class="bi bi-person-plus me-1"></i>
+                Logout
+              </a>
+            </li>
+           
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- IMPORTANT: Padding for Fixed Navbar -->
+    <!-- This padding should be applied to the main content area *below* the navbar,
+               typically on the <body> tag (in styles.css/scss) or a main <div class="container">
+               in your app.component.html that holds the <router-outlet>.
+               Adding it directly here might not be the right place in a component structure. -->
+    <div style="padding-top: 70px">
+      <!-- Your main application content (e.g., <router-outlet>) would go here or in the parent component -->
+    </div>
+  </body>
+</html>
